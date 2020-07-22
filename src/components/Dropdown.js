@@ -48,6 +48,9 @@ const Dropdown = ({ options, selected, onSelectedChange }) => {
           </div>
         </div>
       </div>
+      <p style={{ color: `${selected.value}` }}>
+        Simple cooking, is often best cooking.
+      </p>
     </div>
   );
 };
