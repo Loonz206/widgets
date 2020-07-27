@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Dropdown from "../components/Dropdown";
+import Translate from "../components/Translate";
 import Accordion from "../components/Accordion";
 import Search from "../components/Search";
 
@@ -34,18 +35,19 @@ const options = [
 ];
 
 const App = () => {
-  const [selected, setSelected] = useState(options[0]);
-  const [show, setShow] = useState(true);
+  // const [selected, setSelected] = useState(options[0]);
+  // const [show, setShow] = useState(true);
   return (
     <div>
-      <button onClick={() => setShow(!show)}>Hide/Show Dropdown</button>
+      <Translate />
+      {/* <button onClick={() => setShow(!show)}>Hide/Show Dropdown</button>
       {show ? (
         <Dropdown
           selected={selected}
           onSelectedChange={setSelected}
           options={options}
         />
-      ) : null}
+      ) : null} */}
       {/* <Search /> */}
       {/* <Accordion items={items}/> */}
     </div>
