@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import Header from "../components/Header";
+import Route from "../components/Route";
 import Dropdown from "../components/Dropdown";
 import Translate from "../components/Translate";
 import Accordion from "../components/Accordion";
@@ -35,21 +37,33 @@ const options = [
 ];
 
 const App = () => {
-  // const [selected, setSelected] = useState(options[0]);
-  // const [show, setShow] = useState(true);
+  const [selected, setSelected] = useState(options[0]);
+  const [show, setShow] = useState(true);
   return (
     <div>
-      <Translate />
-      {/* <button onClick={() => setShow(!show)}>Hide/Show Dropdown</button>
-      {show ? (
-        <Dropdown
-          selected={selected}
-          onSelectedChange={setSelected}
-          options={options}
-        />
-      ) : null} */}
-      {/* <Search /> */}
-      {/* <Accordion items={items}/> */}
+      <Header />
+      <Route path="/">
+        <Accordion items={items} />
+      </Route>
+      <Route path="/list">
+        <Search />
+      </Route>
+      <Route path="/dropdown">
+        <button onClick={() => setShow(!show)}> Hide / Show Dropdown </button>{" "}
+        {show ? (
+          <Dropdown
+            label="Select a color"
+            selected={selected}
+            onSelectedChange={setSelected}
+            options={options}
+          />
+        ) : null}
+        <br />
+        <p style={{ color: `${selected.value}` }}>Hello Folks</p>
+      </Route>
+      <Route path="/translate">
+        <Translate />
+      </Route>
     </div>
   );
 };
