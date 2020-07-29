@@ -3,7 +3,18 @@ import axios from "axios";
 
 const Convert = ({ language, text }) => {
   const [translated, setTranslated] = useState("");
+  const [debouncedText, setDebouncedText] = useState(text);
+
   // Will only work on PORT 3000
+  useEffect(() => {
+    const timerId = setTimeout(() => {
+      setDebouncedText(text);
+    }, 500);
+    return () => {
+      clearTimeout(timerId);
+    };
+  }, [text]);
+
   const translateKey = "AIzaSyCHUCmpR7cT_yDFHC98CZJy2LTms-IwDlM";
   useEffect(() => {
     const doTranslate = async () => {
@@ -12,7 +23,7 @@ const Convert = ({ language, text }) => {
         {},
         {
           params: {
-            q: text,
+            q: debouncedText,
             target: language.value,
             key: translateKey,
           },
@@ -21,7 +32,7 @@ const Convert = ({ language, text }) => {
       setTranslated(data.data.translations[0].translatedText);
     };
     doTranslate();
-  }, [language, text]);
+  }, [language, debouncedText]);
   return (
     <div>
       <h1 className="ui header">{translated}</h1>
